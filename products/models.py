@@ -70,3 +70,8 @@ def pre_save_product_receiver(sender, instance, *args, **kwargs):
 
 pre_save.connect(pre_save_product_receiver, sender=Variant)
 
+
+
+class Cart(models.Model):
+    product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    quantity = models.CharField(max_length=100)

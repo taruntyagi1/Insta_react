@@ -6,7 +6,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = (
-            'category_name','slug','image','description','is_active','is_featured','is_public'
+            'id','category_name','slug','image','description','is_active','is_featured','is_public'
         )
 
 class VariantSerializer(serializers.ModelSerializer):
@@ -14,7 +14,7 @@ class VariantSerializer(serializers.ModelSerializer):
     class Meta:
         model = Variant
         fields = (
-            'product','title','slug','stock_record','description','price','image','is_active','is_featured','is_public'
+            'id','product','title','slug','stock_record','description','price','image','is_active','is_featured','is_public'
         )
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -23,6 +23,15 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model  = Product
         fields = (
-          'category',"title",'slug','stock_record','description','price','image','is_active','is_featured','is_public',
+          'id','category',"title",'slug','stock_record','description','price','image','is_active','is_featured','is_public',
         )
 
+
+
+class CartSerializer(serializers.ModelSerializer):
+    product = ProductSerializer()
+    class Meta:
+        model = Cart
+        fields = (
+            'id','product','qauntity'
+        )

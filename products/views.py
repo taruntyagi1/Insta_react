@@ -25,3 +25,11 @@ class CategoryView(ListCreateAPIView):
     
 
     
+class CartView(ListCreateAPIView):
+    queryset =  Cart.objects.all()
+    serializer_class = CartSerializer
+
+
+def get_variants(request,product_id):
+    variant = Variant.objects.filter(id=product_id)
+    return Response(variant,status=status.HTTP_202_ACCEPTED)
