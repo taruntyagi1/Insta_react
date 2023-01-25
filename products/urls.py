@@ -4,8 +4,9 @@ from products.views import *
 
 urlpatterns = [
     path('api/',ProductView.as_view(),name='api'),
-    path('api/variants',VariantView.as_view()),
+    path('variants/<int:product_id>/',VariantView.as_view(),name='variants'),
+    path('variant/<int:product_id>/',ProductVariantList.as_view(),name = "variant"),
     path('api-category',CategoryView.as_view()),
-    path('variants/<int:product_id>/', views.get_variants, name='variants')
+    
    
 ]
