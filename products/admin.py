@@ -15,8 +15,9 @@ class custom_variant(admin.ModelAdmin):
     ordering = ('id',)
 
 class custom_cart(admin.ModelAdmin):
-    list_display = ['product','quantity']
+    list_display = ['user',]
 admin.site.register(Category,custom_category)
 admin.site.register(Product,custom_product)
 admin.site.register(Variant,custom_variant)
 admin.site.register(Cart)
+admin.site.register(cartitem)

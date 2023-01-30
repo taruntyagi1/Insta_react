@@ -78,9 +78,13 @@ def __str__(self):
 
 class Cart(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+   
+
+    
+
+
+class cartitem(models.Model):
+    cart = models.ForeignKey(Cart,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    quantity = models.IntegerField()
-
-
-    def __str__(self):
-        return self.cart.product.title
+    variant = models.ForeignKey(Variant,on_delete=models.SET_NULL,null=True)
+    quantity = models.IntegerField(null = True)
