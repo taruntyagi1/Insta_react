@@ -59,32 +59,42 @@ class Variant(models.Model):
     slug = models.SlugField(max_length=1000,unique=True,blank=True)
     stock_record  = models.IntegerField(blank=True)
     description = models.TextField(max_length=1000,blank = True)
-    image = models.FileField(upload_to='photo/products',blank=True)
+    image = models.FileField(upload_to='photo/variants',blank=True)
     price = models.IntegerField(blank = True)
     is_active = models.BooleanField(default=True)
     is_featured  = models.BooleanField(default=True)
     is_public  = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.title
 def pre_save_product_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = slugify(instance.title)
 
 pre_save.connect(pre_save_product_receiver, sender=Variant)
 
-def __str__(self):
-    return self.title
 
 
 
 class Cart(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
-   
+    user = models.OneToOneField(User,on_delete=models.CASCADE,default=1)
+    product = models.ForeignKey(Product,on_delete=models.CASCADE,null = True)
+
+
+    def __str__(self):
+        return self.product.title
 
     
+   
+
+
 
 
 class cartitem(models.Model):
     cart = models.ForeignKey(Cart,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    variant = models.ForeignKey(Variant,on_delete=models.SET_NULL,null=True)
+    variant = models.ForeignKey(Variant,on_delete=models.SET_NULL,null=True,)
     quantity = models.IntegerField(null = True)
+
+
+    
